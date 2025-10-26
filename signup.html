@@ -3,50 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تسجيل الدخول - خدمتي معاك</title>
+  <title>تسجيل حساب - خدمتي معاك</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
     body {
       font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
       background: linear-gradient(135deg, #0d1b2a, #1b263b);
       color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .signup-container {
+      background-color: rgba(13,27,42,0.9);
+      padding: 40px 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 90%;
       text-align: center;
-      padding: 40px;
+      box-shadow: 0 0 20px rgba(0,188,212,0.5);
     }
-    h2 {
-      color: #00b4d8;
+
+    .signup-container h1 {
+      color: #00bcd4;
+      margin-bottom: 20px;
     }
-    input {
-      width: 80%;
+
+    .signup-container label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: right;
+    }
+
+    .signup-container input, 
+    .signup-container select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .signup-container .btn {
+      width: 100%;
       padding: 12px;
-      margin: 10px 0;
+      border-radius: 8px;
       border: none;
-      border-radius: 10px;
-    }
-    button {
-      background-color: #00b4d8;
+      background-color: #00bcd4;
       color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
     }
-    button:hover {
-      background-color: #0077b6;
+
+    .signup-container .btn:hover {
+      background-color: #0097a7;
     }
-    a {
-      color: #00b4d8;
-      text-decoration: none;
+
+    @media (max-width: 500px) {
+      .signup-container {
+        padding: 30px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <h2>تسجيل الدخول / إنشاء حساب</h2>
-  <form>
-    <input type="text" placeholder="الاسم الكامل" required><br>
-    <input type="email" placeholder="البريد الإلكتروني" required><br>
-    <input type="password" placeholder="كلمة المرور" required><br>
-    <button type="submit">تسجيل</button>
-  </form>
-  <p>أو سجل باستخدام <a href="#">Google</a></p>
+
+  <div class="signup-container">
+    <h1>تسجيل حساب جديد</h1>
+    <form id="signupForm">
+      <label for="accountType">نوع الحساب</label>
+      <select id="accountType" required>
+        <option value="">اختر نوع الحساب</option>
+        <option value="freelancer">فريلانسر</option>
+        <option value="client">عميل</option>
+        <option value="company">شركة</option>
+        <option value="contentCreator">صانع محتوى</option>
+      </select>
+
+      <label for="fullName">الاسم الكامل</label>
+      <input type="text" id="fullName" placeholder="أدخل الاسم الكامل" required>
+
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+
+      <label for="confirmEmail">تأكيد البريد الإلكتروني</label>
+      <input type="email" id="confirmEmail" placeholder="أعد إدخال البريد الإلكتروني" required>
+
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+
+      <label for="confirmPassword">تأكيد كلمة المرور</label>
+      <input type="password" id="confirmPassword" placeholder="أعد إدخال كلمة المرور" required>
+
+      <button type="submit" class="btn">تسجيل</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('signupForm');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const confirmEmail = document.getElementById('confirmEmail').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const accountType = document.getElementById('accountType').value;
+
+      if(email !== confirmEmail) {
+        alert('البريد الإلكتروني غير متطابق!');
+        return;
+      }
+
+      if(password !== confirmPassword) {
+        alert('كلمة المرور غير متطابقة!');
+        return;
+      }
+
+      // تخزين معلومات المستخدم في Local Storage
+      const user = { fullName, email, password, accountType };
+      localStorage.setItem('user', JSON.stringify(user));
+
+      // تحويل المستخدم مباشرة لصفحة profile.html
+      window.location.href = 'profile.html';
+    });
+  </script>
+
 </body>
 </html>
