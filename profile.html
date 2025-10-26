@@ -1,46 +1,273 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ملفي الشخصي - خدمتي معاك</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background: #f5f6fa;
+      color: #222;
+    }
+
+    /* Header - الغلاف + صورة شخصية */
+    .profile-header {
+      position: relative;
+      height: 250px;
+      background: url('https://i.imgur.com/6VBx3io.png') center/cover no-repeat;
+    }
+
+    .profile-pic {
+      position: absolute;
+      bottom: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .profile-content {
+      text-align: center;
+      margin-top: 80px;
+      padding: 20px;
+    }
+
+    .profile-content h2 {
+      margin: 10px 0 5px;
+      font-size: 28px;
+    }
+
+    .profile-content p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #00bcd4;
+      font-weight: bold;
+    }
+
+    .edit-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .edit-btn:hover {
+      background-color: #0097a7;
+    }
+
+    /* باكجات */
+    .packages {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .package {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .package h3 {
+      margin: 0 0 5px;
+      color: #00bcd4;
+    }
+
+    .package p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .add-package-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .add-package-btn:hover {
+      background-color: #222;
+    }
+
+    /* Form تعديل الملف الشخصي */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #00bcd4;
+    }
+
+    .modal-content label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: right;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content .save-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background-color: #00bcd4;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #555;
+    }
+
+    @media (max-width: 600px) {
+      .profile-content h2 { font-size: 24px; }
+      .profile-content p { font-size: 14px; }
+      .profile-pic { width: 100px; height: 100px; bottom: -50px; }
+    }
+  </style>
 </head>
-<body class="dark-theme">
-  <header>
-    <h1>ملفي الشخصي</h1>
-    <nav>
-      <a href="index.html">الرئيسية</a>
-      <a href="services.html">الخدمات</a>
-      <a href="about.html">من نحن</a>
-      <a href="contact.html">اتصل بنا</a>
-    </nav>
-  </header>
+<body>
 
-  <main class="profile-container">
-    <section class="profile-card">
-      <img src="https://i.imgur.com/6VBx3io.png" alt="صورة المستخدم" class="profile-pic" />
-      <h2>حمّودي بلجود</h2>
-      <p>صانع محتوى تقني ومؤسس موقع <strong>خدمتي معاك</strong></p>
-      <div class="social-links">
-        <a href="#">تيك توك</a>
-        <a href="#">إنستغرام</a>
-        <a href="#">موقع إلكتروني</a>
-      </div>
-    </section>
+  <!-- الغلاف + صورة شخصية -->
+  <div class="profile-header">
+    <img src="https://i.imgur.com/6VBx3io.png" class="profile-pic" id="profilePic" alt="صورة المستخدم">
+  </div>
 
-    <section class="profile-details">
-      <h3>معلومات الحساب</h3>
-      <ul>
-        <li><strong>البريد:</strong> example@email.com</li>
-        <li><strong>العضوية:</strong> مميزة</li>
-        <li><strong>عدد الطلبات:</strong> 14</li>
-      </ul>
-    </section>
-  </main>
+  <!-- محتوى الملف الشخصي -->
+  <div class="profile-content">
+    <h2 id="profileName">حمّودي بلجود</h2>
+    <p id="profileDesc">صانع محتوى تقني ومؤسس موقع <strong>خدمتي معاك</strong></p>
 
-  <footer>
-    <p>© 2025 خدمتي معاك - جميع الحقوق محفوظة</p>
-  </footer>
-</body>
-</html>
+    <div class="social-links">
+      <a href="#" id="tiktokLink">تيك توك</a>
+      <a href="#" id="instagramLink">إنستغرام</a>
+      <a href="#" id="youtubeLink">يوتيوب</a>
+    </div>
+
+    <button class="edit-btn" id="editProfileBtn">تعديل الملف الشخصي</button>
+  </div>
+
+  <!-- باكجات -->
+  <div class="packages" id="packagesContainer">
+    <!-- الباكجات ستضاف هنا -->
+  </div>
+  <button class="add-package-btn" id="addPackageBtn">إضافة باكج جديد</button>
+
+  <!-- نافذة تعديل الملف الشخصي -->
+  <div class="modal" id="editModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>تعديل الملف الشخصي</h2>
+
+      <label>الاسم الكامل</label>
+      <input type="text" id="editName">
+
+      <label>الوصف</label>
+      <input type="text" id="editDesc">
+
+      <label>رابط تيك توك</label>
+      <input type="text" id="editTiktok">
+
+      <label>رابط إنستغرام</label>
+      <input type="text" id="editInstagram">
+
+      <label>رابط يوتيوب</label>
+      <input type="text" id="editYoutube">
+
+      <button class="save-btn" id="saveProfileBtn">حفظ التغييرات</button>
+    </div>
+  </div>
+
+  <script>
+    // بيانات المستخدم الأساسية (يمكن استبدالها بـ Local Storage لاحقاً)
+    let packages = [];
+
+    const editModal = document.getElementById('editModal');
+    const editBtn = document.getElementById('editProfileBtn');
+    const closeModal = document.getElementById('closeModal');
+    const saveBtn = document.getElementById('saveProfileBtn');
+
+    editBtn.onclick = () => {
+      editModal.style.display = 'flex';
+      // ملء الحقول بالقيم الحالية
+      document.getElementById('editName').value = document.getElementById('profileName').textContent;
+      document.getElementById('editDesc').value = document.getElementById('profileDesc').textContent;
+      document.getElementById('editTiktok').value = document.getElementById('tiktokLink').href;
+      document.getElementById('editInstagram').value = document.getElementById('instagramLink').href;
+      document.getElementById('editYoutube').value = document.getElementById('youtubeLink').href;
+    }
+
+    closeModal.onclick = () => { editModal.style.display = 'none'; }
+
+    saveBtn.onclick = () => {
+      document.getElementById('profileName').textContent = document.getElementById('editName').value;
+      document.getElementById('profileDesc').textContent = document.getElementById('editDesc').value;
+      document.getElementById('tiktokLink').href = document.getElementById('editTiktok').value;
+      document.getElementById('instagramLink').href = document.getElementById('editInstagram').value;
+      document.getElementById('youtubeLink').href = document.getElementById('editYoutube').value;
+      editModal.style.display = 'none';
+    }
+
+    // إضافة باكجات
+    const packagesContainer = document.getElementById('packagesContainer');
+    const addPackageBtn = document.getElementById('addPackageBtn');
+
+    addPackageBtn.onclick = () => {
+      const name = prompt('اسم العمل/الباكج:');
+      const price = prompt('السعر بالدولار:
