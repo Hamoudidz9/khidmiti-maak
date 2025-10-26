@@ -10,168 +10,265 @@
     body {
       margin: 0;
       font-family: 'Tajawal', sans-serif;
-      background: #f5f6fa;
-      color: #222;
+      background: #f0f4f8;
+      color: #333;
     }
 
-    /* الغلاف + صورة شخصية */
+    /* الهيدر مع الغلاف والصورة الشخصية */
     .profile-header {
       position: relative;
-      height: 250px;
-      background: #ccc;
+      height: 300px;
+      background: linear-gradient(to bottom, #00bcd4, #0097a7);
       text-align: center;
+      overflow: hidden;
     }
 
     .cover-photo {
       width: 100%;
-      height: 250px;
+      height: 100%;
       object-fit: cover;
+      opacity: 0.8;
+    }
+
+    .profile-pic-container {
+      position: absolute;
+      bottom: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      background: #fff;
+      overflow: hidden;
     }
 
     .profile-pic {
-      position: absolute;
-      bottom: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid white;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      background: #ddd;
     }
 
-    .profile-content {
+    .profile-info {
       text-align: center;
       margin-top: 80px;
       padding: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 80px auto 20px;
     }
 
-    .profile-content h2 {
-      margin: 10px 0 5px;
-      font-size: 28px;
+    .profile-info h2 {
+      font-size: 32px;
+      margin: 10px 0;
+      color: #00bcd4;
     }
 
-    .profile-content p {
-      font-size: 16px;
-      color: #555;
+    .profile-info p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .social-links {
+      margin: 20px 0;
     }
 
     .social-links a {
-      margin: 0 10px;
+      margin: 0 15px;
       text-decoration: none;
-      color: #00bcd4;
+      color: #fff;
+      background: #00bcd4;
+      padding: 8px 16px;
+      border-radius: 20px;
       font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #0097a7;
     }
 
     .edit-btn, .add-package-btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
+      display: block;
+      margin: 20px auto;
+      padding: 12px 30px;
       background-color: #00bcd4;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 25px;
       cursor: pointer;
+      font-size: 16px;
       transition: 0.3s;
+      box-shadow: 0 2px 10px rgba(0, 188, 212, 0.3);
     }
 
     .edit-btn:hover, .add-package-btn:hover {
       background-color: #0097a7;
+      box-shadow: 0 4px 15px rgba(0, 151, 167, 0.4);
     }
 
-    .packages {
+    .packages-section {
       max-width: 900px;
-      margin: 30px auto;
+      margin: 40px auto;
       padding: 0 20px;
     }
 
     .package {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
-    /* Form تعديل الملف الشخصي */
+    .package h3 {
+      font-size: 24px;
+      color: #00bcd4;
+      margin-bottom: 10px;
+    }
+
+    .package p {
+      font-size: 16px;
+      color: #555;
+      margin: 5px 0;
+    }
+
+    .package-actions {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .edit-package-btn, .delete-package-btn {
+      padding: 8px 16px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .edit-package-btn {
+      background: #4caf50;
+      color: white;
+    }
+
+    .edit-package-btn:hover {
+      background: #388e3c;
+    }
+
+    .delete-package-btn {
+      background: #f44336;
+      color: white;
+    }
+
+    .delete-package-btn:hover {
+      background: #d32f2f;
+    }
+
+    /* النماذج المودال */
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
 
     .modal-content {
-      background: white;
+      background: #fff;
       padding: 30px;
-      border-radius: 12px;
-      max-width: 500px;
+      border-radius: 15px;
+      max-width: 600px;
       width: 90%;
       position: relative;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     }
 
     .modal-content h2 {
       margin-top: 0;
       color: #00bcd4;
+      text-align: center;
     }
 
     .modal-content label {
       display: block;
-      margin: 10px 0 5px;
+      margin: 15px 0 5px;
       text-align: right;
+      font-weight: bold;
     }
 
     .modal-content input {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 16px;
     }
 
     .modal-content .save-btn {
       width: 100%;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 25px;
       border: none;
       background-color: #00bcd4;
       color: white;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .modal-content .save-btn:hover {
+      background-color: #0097a7;
     }
 
     .close-btn {
       position: absolute;
-      top: 10px;
+      top: 15px;
       left: 15px;
-      font-size: 20px;
+      font-size: 24px;
       cursor: pointer;
-      color: #555;
+      color: #888;
+      transition: color 0.3s;
+    }
+
+    .close-btn:hover {
+      color: #333;
     }
 
     @media (max-width: 600px) {
-      .profile-content h2 { font-size: 24px; }
-      .profile-content p { font-size: 14px; }
-      .profile-pic { width: 100px; height: 100px; bottom: -50px; }
+      .profile-header { height: 200px; }
+      .profile-pic-container { width: 120px; height: 120px; bottom: -60px; }
+      .profile-info h2 { font-size: 26px; }
+      .profile-info p { font-size: 16px; }
+      .package { padding: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- الغلاف + صورة شخصية -->
+  <!-- الهيدر -->
   <div class="profile-header">
     <img src="default-cover.jpg" class="cover-photo" id="coverPhoto" alt="صورة الغلاف">
-    <img src="default.png" class="profile-pic" id="profilePic" alt="صورة المستخدم">
+    <div class="profile-pic-container">
+      <img src="default.png" class="profile-pic" id="profilePic" alt="صورة المستخدم">
+    </div>
   </div>
 
-  <!-- محتوى الملف الشخصي -->
-  <div class="profile-content">
+  <!-- معلومات الملف الشخصي -->
+  <div class="profile-info">
     <h2 id="profileName">حمّودي بلجود</h2>
     <p id="profileDesc">صانع محتوى تقني ومؤسس موقع <strong>خدمتي معاك</strong></p>
 
@@ -184,14 +281,17 @@
     <button class="edit-btn" id="editProfileBtn">تعديل الملف الشخصي</button>
   </div>
 
-  <!-- باكجات -->
-  <div class="packages" id="packagesContainer"></div>
-  <button class="add-package-btn" id="addPackageBtn">إضافة باكج جديد</button>
+  <!-- قسم الباكجات -->
+  <div class="packages-section">
+    <h2 style="text-align: center; color: #00bcd4; margin-bottom: 30px;">الباكجات المتاحة</h2>
+    <div id="packagesContainer"></div>
+    <button class="add-package-btn" id="addPackageBtn">إضافة باكج جديد</button>
+  </div>
 
-  <!-- نافذة تعديل الملف الشخصي -->
-  <div class="modal" id="editModal">
+  <!-- مودال تعديل الملف الشخصي -->
+  <div class="modal" id="editProfileModal">
     <div class="modal-content">
-      <span class="close-btn" id="closeModal">&times;</span>
+      <span class="close-btn" id="closeProfileModal">&times;</span>
       <h2>تعديل الملف الشخصي</h2>
 
       <label>الاسم الكامل</label>
@@ -219,34 +319,63 @@
     </div>
   </div>
 
-  <script>
-    let packages = [];
-    const editModal = document.getElementById('editModal');
-    const editBtn = document.getElementById('editProfileBtn');
-    const closeModal = document.getElementById('closeModal');
-    const saveBtn = document.getElementById('saveProfileBtn');
+  <!-- مودال إضافة/تعديل باكج -->
+  <div class="modal" id="packageModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closePackageModal">&times;</span>
+      <h2 id="packageModalTitle">إضافة باكج جديد</h2>
 
+      <label>نوع الخدمة</label>
+      <input type="text" id="packageType">
+
+      <label>السعر (د.م)</label>
+      <input type="number" id="packagePrice">
+
+      <label>الوصف</label>
+      <input type="text" id="packageDesc">
+
+      <button class="save-btn" id="savePackageBtn">حفظ الباكج</button>
+    </div>
+  </div>
+
+  <script>
+    let packages = JSON.parse(localStorage.getItem('packages')) || []; // استرجاع البيانات المحفوظة
+    let editingIndex = -1;
+
+    const editProfileModal = document.getElementById('editProfileModal');
+    const packageModal = document.getElementById('packageModal');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const addPackageBtn = document.getElementById('addPackageBtn');
+    const closeProfileModal = document.getElementById('closeProfileModal');
+    const closePackageModal = document.getElementById('closePackageModal');
+    const saveProfileBtn = document.getElementById('saveProfileBtn');
+    const savePackageBtn = document.getElementById('savePackageBtn');
+    const packagesContainer = document.getElementById('packagesContainer');
     const profilePic = document.getElementById('profilePic');
     const coverPhoto = document.getElementById('coverPhoto');
+    const packageModalTitle = document.getElementById('packageModalTitle');
 
-    // فتح نافذة التعديل
-    editBtn.onclick = () => {
-      editModal.style.display = 'flex';
+    // عرض الباكجات عند تحميل الصفحة
+    renderPackages();
+
+    // فتح مودال تعديل الملف الشخصي
+    editProfileBtn.onclick = () => {
+      editProfileModal.style.display = 'flex';
       document.getElementById('editName').value = document.getElementById('profileName').textContent;
       document.getElementById('editDesc').value = document.getElementById('profileDesc').textContent;
       document.getElementById('editTiktok').value = document.getElementById('tiktokLink').href;
       document.getElementById('editInstagram').value = document.getElementById('instagramLink').href;
       document.getElementById('editYoutube').value = document.getElementById('youtubeLink').href;
-    }
+    };
 
-    closeModal.onclick = () => { editModal.style.display = 'none'; }
+    closeProfileModal.onclick = () => { editProfileModal.style.display = 'none'; };
 
     // رفع صورة شخصية
     document.getElementById('profilePicInput').addEventListener('change', function() {
       const file = this.files[0];
-      if(file){
+      if (file) {
         const reader = new FileReader();
-        reader.onload = function(e){ profilePic.src = e.target.result; }
+        reader.onload = (e) => { profilePic.src = e.target.result; };
         reader.readAsDataURL(file);
       }
     });
@@ -254,12 +383,90 @@
     // رفع صورة الغلاف
     document.getElementById('coverPhotoInput').addEventListener('change', function() {
       const file = this.files[0];
-      if(file){
+      if (file) {
         const reader = new FileReader();
-        reader.onload = function(e){ coverPhoto.src = e.target.result; }
+        reader.onload = (e) => { coverPhoto.src = e.target.result; };
         reader.readAsDataURL(file);
       }
     });
 
-    // حفظ التعديلات
-    saveBtn.onclick =
+    // حفظ تعديلات الملف الشخصي
+    saveProfileBtn.onclick = () => {
+      document.getElementById('profileName').textContent = document.getElementById('editName').value;
+      document.getElementById('profileDesc').textContent = document.getElementById('editDesc').value;
+      document.getElementById('tiktokLink').href = document.getElementById('editTiktok').value;
+      document.getElementById('instagramLink').href = document.getElementById('editInstagram').value;
+      document.getElementById('youtubeLink').href = document.getElementById('editYoutube').value;
+      editProfileModal.style.display = 'none';
+    };
+
+    // فتح مودال إضافة باكج
+    addPackageBtn.onclick = () => {
+      editingIndex = -1;
+      packageModalTitle.textContent = 'إضافة باكج جديد';
+      document.getElementById('packageType').value = '';
+      document.getElementById('packagePrice').value = '';
+      document.getElementById('packageDesc').value = '';
+      packageModal.style.display = 'flex';
+    };
+
+    closePackageModal.onclick = () => { packageModal.style.display = 'none'; };
+
+    // حفظ الباكج (إضافة أو تعديل) مع الحفظ في localStorage
+    savePackageBtn.onclick = () => {
+      const type = document.getElementById('packageType').value;
+      const price = document.getElementById('packagePrice').value;
+      const desc = document.getElementById('packageDesc').value;
+
+      if (type && price && desc) {
+        if (editingIndex === -1) {
+          packages.push({ type, price, desc });
+        } else {
+          packages[editingIndex] = { type, price, desc };
+        }
+        localStorage.setItem('packages', JSON.stringify(packages)); // حفظ في localStorage
+        renderPackages();
+        packageModal.style.display = 'none';
+      }
+    };
+
+    // عرض الباكجات
+    function renderPackages() {
+      packagesContainer.innerHTML = '';
+      packages.forEach((pkg, index) => {
+        const packageDiv = document.createElement('div');
+        packageDiv.className = 'package';
+        packageDiv.innerHTML = `
+          <h3>${pkg.type}</h3>
+          <p>السعر: ${pkg.price} د.م</p>
+          <p>${pkg.desc}</p>
+          <div class="package-actions">
+            <button class="edit-package-btn" onclick="editPackage(${index})">تعديل</button>
+            <button class="delete-package-btn" onclick="deletePackage(${index})">حذف</button>
+          </div>
+        `;
+        packagesContainer.appendChild(packageDiv);
+      });
+    }
+
+    // تعديل باكج
+    window.editPackage = (index) => {
+      editingIndex = index;
+      packageModalTitle.textContent = 'تعديل الباكج';
+      document.getElementById('packageType').value = packages[index].type;
+      document.getElementById('packagePrice').value = packages[index].price;
+      document.getElementById('packageDesc').value = packages[index].desc;
+      packageModal.style.display = 'flex';
+    };
+
+    // حذف باكج
+    window.deletePackage = (index) => {
+      if (confirm('هل أنت متأكد من حذف هذا الباكج؟')) {
+        packages.splice(index, 1);
+        localStorage.setItem('packages', JSON.stringify(packages)); // تحديث localStorage
+        renderPackages();
+      }
+    };
+  </script>
+</body>
+</html>
